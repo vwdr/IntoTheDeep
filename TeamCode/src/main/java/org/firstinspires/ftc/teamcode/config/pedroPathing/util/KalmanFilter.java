@@ -4,9 +4,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /**
  * This is the KalmanFilter class. This creates a Kalman filter that is used to smooth out data.
- *
- * @author Anyi Lin - 10158 Scott's Bots
- * @version 1.0, 7/17/2024
  */
 public class KalmanFilter {
     private KalmanFilterParameters parameters;
