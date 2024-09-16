@@ -11,8 +11,8 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathCha
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.util.Timer;
 
-@Autonomous(name = "Auto Blue Closer Bucket", group = "Autonomous")
-public class AutoBlueCloserBucket extends OpMode {
+@Autonomous(name = "BlueAuto", group = "Autonomous")
+public class BlueAuto extends OpMode {
 
     private Follower follower;
     private Timer pathTimer;
