@@ -110,55 +110,55 @@ public class BlueAuto extends OpMode {
                 setPathState(2);
                 break;
             case 2:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line2);
                     setPathState(3);
                 }
                 break;
             case 3:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line3);
                     setPathState(4);
                 }
                 break;
             case 4:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line4);
                     setPathState(5);
                 }
                 break;
             case 5:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line5);
                     setPathState(6);
                 }
                 break;
             case 6:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line6);
                     setPathState(7);
                 }
                 break;
             case 7:
-                if (follower.isBusy()) {
+                if ((!(follower.isBusy())) {
                     follower.followPath(line7);
                     setPathState(8);
                 }
                 break;
             case 8:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line8);
                     setPathState(9);
                 }
                 break;
             case 9:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line9);
                     setPathState(10);
                 }
                 break;
             case 10:
-                if (follower.isBusy()) {
+                if (!(follower.isBusy())) {
                     follower.followPath(line10);
                     setPathState(11);
                 }
