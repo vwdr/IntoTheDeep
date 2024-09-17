@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.config.pedroPathing.localization;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.MathFunctions;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Vector;
 
+
 /**
  * This is the Pose class. It defines poses in 2D space, like the Pose2D class in Road Runner except
  * in the Pedro Pathing code so I don't have to import the Road Runner library. A Pose consists of
