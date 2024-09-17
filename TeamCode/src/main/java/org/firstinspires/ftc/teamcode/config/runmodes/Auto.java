@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.opmode.auto;
+package org.firstinspires.ftc.teamcode.config.runmodes;
 
 
 import static org.firstinspires.ftc.teamcode.config.util.FieldConstants.*;
@@ -7,23 +7,16 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierCurve;
-import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierPoint;
-import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathChain;
-import org.firstinspires.ftc.teamcode.config.pedroPathing.util.Timer;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierLine;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
-import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.PathBuilder;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
-import org.firstinspires.ftc.teamcode.config.util.action.Action;
-import org.firstinspires.ftc.teamcode.config.util.action.ActionStorage;
-import org.firstinspires.ftc.teamcode.config.util.action.ParallelAction;
-import org.firstinspires.ftc.teamcode.config.util.action.RunAction;
-import org.firstinspires.ftc.teamcode.config.util.action.SequentialAction;
-import org.firstinspires.ftc.teamcode.config.util.action.SleepAction;
 
-public class Auto {
+public class  Auto {
+
+
+
 
     private RobotStart startLocation;
 

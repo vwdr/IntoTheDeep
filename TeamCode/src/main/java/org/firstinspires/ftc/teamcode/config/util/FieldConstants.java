@@ -13,6 +13,8 @@ public class FieldConstants {
         RED_OBSERVATION
     }
 
+
+    //StartPoses
     public static final Pose blueBucketStartPose = new Pose(8, 79.5, Math.toRadians(180));
     public static final Pose blueObservationStartPose = new Pose(8, 36, Math.toRadians(180));
     public static final Pose redBucketStartPose = new Pose(144-8, 79.5, 0);

@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode.config.util;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
-import org.firstinspires.ftc.teamcode.opmode.auto.Auto;
+import org.firstinspires.ftc.teamcode.config.runmodes.Auto;
 
-public abstract class BaronAuto extends OpMode {
+public abstract class NinjaAuto extends OpMode {
     public static int pathState;
     public Auto auto;
     public boolean isBlue, isBucket;
