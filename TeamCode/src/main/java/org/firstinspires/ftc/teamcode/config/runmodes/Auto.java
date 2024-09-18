@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierLine;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
+import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
 
 public class  Auto {
 
@@ -21,8 +22,11 @@ public class  Auto {
     private RobotStart startLocation;
 
 
+
     public Follower follower;
     public Telemetry telemetry;
+
+    public VisionSubsystem vision;
 
     private boolean isBlue;
     private boolean isBucket;
@@ -40,6 +44,8 @@ public class  Auto {
         this.isBucket = isBucket;
 
         startLocation = isBlue ? (isBucket ? RobotStart.BLUE_BUCKET : RobotStart.BLUE_OBSERVATION) : (isBucket ? RobotStart.RED_BUCKET : RobotStart.RED_OBSERVATION);
+
+        vision = new VisionSubsystem(hardwareMap, telemetry);
         createPoses();
         buildPaths();
 

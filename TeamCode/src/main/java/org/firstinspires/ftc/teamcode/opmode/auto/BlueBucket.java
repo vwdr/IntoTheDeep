@@ -7,11 +7,13 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.follower.Follower;
 import org.firstinspires.ftc.teamcode.config.runmodes.Auto;
 import org.firstinspires.ftc.teamcode.config.util.action.Actions;
 import org.firstinspires.ftc.teamcode.config.util.action.SequentialAction;
+import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
 
 @Autonomous(name="BlueBucket", group="B")
 public class BlueBucket extends OpMode {
     public int pathState;
     public Auto auto;
+    public VisionSubsystem visionSubsystem;
 
     @Override
     public void init() {
@@ -41,23 +43,17 @@ public class BlueBucket extends OpMode {
 //                Actions.runBlocking(auto.claw.closeClaw);
 //                Actions.runBlocking(auto.lift.toHighChamber);
                 auto.follower.followPath(auto.preload);
+
+
                 setPathState(1);
                 break;
             case 1:
                 if(!auto.follower.isBusy()) {
 
-//                    if (auto.lift.isAtTarget()) {
-////                        Actions.runBlocking(auto.lift.toHighChamberRelease);
-//                    }
 
-//                    if (auto.lift.isAtTarget()) {
-////                        Actions.runBlocking(auto.claw.openClaw);
-//                    }
-
-//                    Actions.runBlocking(auto.lift.toZero);
                     auto.follower.followPath(auto.element1);
-//                    Actions.runBlocking(auto.intake.pivotGround);
-//                    Actions.runBlocking(auto.intake.spinIn);
+
+
                     setPathState(2);
                 }
                 break;
@@ -66,6 +62,10 @@ public class BlueBucket extends OpMode {
                     auto.follower.followPath(auto.score1);
 //                    Actions.runBlocking(auto.intake.spinStop);
 //                    Actions.runBlocking(auto.intake.pivotTransfer);
+
+                    visionSubsystem.LocalizationMT2(auto.follower.getPose().getHeading());
+
+
                     setPathState(3);
                 }
                 break;
