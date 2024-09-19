@@ -11,6 +11,8 @@ import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
 
 @Autonomous(name="BlueBucket", group="B")
 public class BlueBucket extends OpMode {
+
+
     public int pathState;
     public Auto auto;
     public VisionSubsystem visionSubsystem;
@@ -23,6 +25,7 @@ public class BlueBucket extends OpMode {
     @Override
     public void start() {
         auto.start();
+        visionSubsystem.start();
         setPathState(0);
     }
 
@@ -44,6 +47,7 @@ public class BlueBucket extends OpMode {
 //                Actions.runBlocking(auto.lift.toHighChamber);
                 auto.follower.followPath(auto.preload);
 
+//                visionSubsystem.localizationMT2(auto.follower.getPose().getHeading());
 
                 setPathState(1);
                 break;
@@ -62,8 +66,6 @@ public class BlueBucket extends OpMode {
                     auto.follower.followPath(auto.score1);
 //                    Actions.runBlocking(auto.intake.spinStop);
 //                    Actions.runBlocking(auto.intake.pivotTransfer);
-
-                    visionSubsystem.LocalizationMT2(auto.follower.getPose().getHeading());
 
 
                     setPathState(3);
@@ -114,6 +116,8 @@ public class BlueBucket extends OpMode {
     }
 
     public void setPathState(int x) {
+
         pathState = x;
+
     }
 }
