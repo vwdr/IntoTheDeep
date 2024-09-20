@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.config.subsystem;
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.teamcode.config.RobotConstants;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.PoseUpdater;
 import com.qualcomm.hardware.limelightvision.LLResult;
@@ -9,7 +10,10 @@ import com.qualcomm.hardware.limelightvision.LLResultTypes;
 import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.robot.Robot;
+
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.config.RobotConstants;
 
 public class VisionSubsystem {
 
@@ -38,34 +42,35 @@ public class VisionSubsystem {
     public void switchPipeline (String pipelineName) {
         switch (pipelineName.toLowerCase()) {
             case "apriltag":
-                limelight.pipelineSwitch(0);
+                limelight.pipelineSwitch(RobotConstants.apriltag);
                 telemetry.addData("AprilTag", "Switched to AprilTag Pipeline");
+                localizationMT2(poseUpdater.getPose().getHeading());
                 break;
-            case "sample":
-                limelight.pipelineSwitch(1);
-                telemetry.addData("Pipeline", "Switched to Sample Pipeline");
+            case "blue":
+                limelight.pipelineSwitch(RobotConstants.blue);
+                telemetry.addData("Pipeline", "Switched to Blue Pipeline");
                 break;
+            case "red":
+                limelight.pipelineSwitch(RobotConstants.red);
+                telemetry.addData("Pipeline", "Switched to Red Pipeline");
+                break;
+            case "yellow":
+                limelight.pipelineSwitch(RobotConstants.yellow);
+                telemetry.addData("Pipeline", "Switched to Red Pipeline");
+                break;
+            default:
+                limelight.pipelineSwitch(RobotConstants.obstacleDetection);
+                obstacleDetection();
         }
         telemetry.update();
     }
 
-    public void sampleDetection (String sample) {
+    public void obstacleDetection () {
 
-
-        switch(sample) {
-            case "blue":
-                //distance
-                break;
-            case "red":
-                //distance
-                break;
-            case "yellow":
-                //distance
-                break;
-        }
 
 
     }
+
 
 
     public void localizationMT2 (double heading) {
@@ -90,5 +95,9 @@ public class VisionSubsystem {
             telemetry.addData("Limelight", "No Targets");
         }
 
+    }
+
+    public void stop () {
+        limelight.stop();
     }
 }

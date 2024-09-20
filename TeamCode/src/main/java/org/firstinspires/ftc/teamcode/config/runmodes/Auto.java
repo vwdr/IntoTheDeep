@@ -46,6 +46,7 @@ public class  Auto {
         startLocation = isBlue ? (isBucket ? RobotStart.BLUE_BUCKET : RobotStart.BLUE_OBSERVATION) : (isBucket ? RobotStart.RED_BUCKET : RobotStart.RED_OBSERVATION);
 
         vision = new VisionSubsystem(hardwareMap, telemetry);
+
         createPoses();
         buildPaths();
 
@@ -60,6 +61,8 @@ public class  Auto {
     }
 
     public void start() {
+
+        vision.start(); //start limelight
 
     }
 
