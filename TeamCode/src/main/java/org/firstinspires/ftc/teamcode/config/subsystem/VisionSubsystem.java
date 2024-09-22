@@ -94,6 +94,7 @@ public class VisionSubsystem {
     public void obstacleDetection () {
 
 
+
     }
 
     public void localizationMT2 (double heading) {

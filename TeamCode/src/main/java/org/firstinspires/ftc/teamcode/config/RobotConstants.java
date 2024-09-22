@@ -17,9 +17,9 @@ public class RobotConstants {
 
     /**Vision Constants**/
     public static final int apriltag = 0;
-    public static final int blue = 1;
-    public static final int red = 2;
-    public static final int yellow = 3;
+    public static final int blue = 2;
+    public static final int red = 3;
+    public static final int yellow = 1;
     public static final int obstacleDetection = 4;
 
     /**Limelight Constants**/
