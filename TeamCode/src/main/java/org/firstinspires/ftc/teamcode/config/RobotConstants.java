@@ -22,4 +22,13 @@ public class RobotConstants {
     public static final int yellow = 3;
     public static final int obstacleDetection = 4;
 
+    /**Limelight Constants**/
+    // how many degrees back is your limelight rotated from perfectly vertical?
+    public static final double limelightMountAngleDegrees = 0;
+
+    // distance from the center of the Limelight lens to the floor
+    public static final double limelightLensHeightInches = 4.0;
+
+    // distance from the target to the floor
+    public static final double goalHeightInches = 0.0;
 }

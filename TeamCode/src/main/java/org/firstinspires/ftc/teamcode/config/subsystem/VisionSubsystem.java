@@ -32,11 +32,9 @@ public class VisionSubsystem {
 
 
     public void start () {
-
         limelight.pipelineSwitch(0);
         limelight.setPollRateHz(100); // This sets how often we ask Limelight for data (100 times per second)
         limelight.start();
-
     }
 
     public void switchPipeline (String pipelineName) {
@@ -49,14 +47,17 @@ public class VisionSubsystem {
             case "blue":
                 limelight.pipelineSwitch(RobotConstants.blue);
                 telemetry.addData("Pipeline", "Switched to Blue Pipeline");
+                distanceCalc();
                 break;
             case "red":
                 limelight.pipelineSwitch(RobotConstants.red);
                 telemetry.addData("Pipeline", "Switched to Red Pipeline");
+                distanceCalc();
                 break;
             case "yellow":
                 limelight.pipelineSwitch(RobotConstants.yellow);
                 telemetry.addData("Pipeline", "Switched to Red Pipeline");
+                distanceCalc();
                 break;
             default:
                 limelight.pipelineSwitch(RobotConstants.obstacleDetection);
@@ -65,13 +66,35 @@ public class VisionSubsystem {
         telemetry.update();
     }
 
-    public void obstacleDetection () {
+    public double distanceCalc () {
 
+        LLResult result = limelight.getLatestResult();
+        if (result != null && result.isValid()) {
+            double ty = result.getTy(); // How far up or down the target is (degrees)
 
+            telemetry.addData("Target Y", ty);
+
+            double angleToGoalDegrees = RobotConstants.limelightMountAngleDegrees + ty;
+            double angleToGoalRadians = angleToGoalDegrees * (3.14159 / 180.0);
+
+            //calculate distance
+            double distanceFromLimelightToGoalInches = (RobotConstants.goalHeightInches - RobotConstants.limelightLensHeightInches) / Math.tan(angleToGoalRadians);
+
+            return distanceFromLimelightToGoalInches;
+
+        } else {
+            telemetry.addData("Limelight", "No Targets");
+        }
+
+        //if nothing is detected return 0
+        return 0;
 
     }
 
+    public void obstacleDetection () {
 
+
+    }
 
     public void localizationMT2 (double heading) {
         LLResult result = limelight.getLatestResult();
