@@ -8,6 +8,7 @@ import org.firstinspires.ftc.teamcode.config.runmodes.Auto;
 import org.firstinspires.ftc.teamcode.config.util.action.Actions;
 import org.firstinspires.ftc.teamcode.config.util.action.SequentialAction;
 import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.LED;
 
 @Autonomous(name="BlueBucket", group="B")
 public class BlueBucket extends OpMode {
@@ -16,6 +17,7 @@ public class BlueBucket extends OpMode {
     public int pathState;
     public Auto auto;
     public VisionSubsystem visionSubsystem;
+    public LED led;
 
     @Override
     public void init() {
@@ -26,6 +28,7 @@ public class BlueBucket extends OpMode {
     public void start() {
         auto.start();
         visionSubsystem.start();
+        led.lighting();
         setPathState(0);
     }
 
@@ -45,6 +48,7 @@ public class BlueBucket extends OpMode {
             case 0:
 //                Actions.runBlocking(auto.claw.closeClaw);
 //                Actions.runBlocking(auto.lift.toHighChamber);
+
                 auto.follower.followPath(auto.preload);
 
 //                visionSubsystem.localizationMT2(auto.follower.getPose().getHeading());
