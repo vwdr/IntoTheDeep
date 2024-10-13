@@ -13,6 +13,8 @@ import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.BezierL
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Path;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.pathGeneration.Point;
 import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.ArmSubsystem;
+import org.firstinspires.ftc.teamcode.config.subsystem.ClawSubsystem;
 
 public class  Auto {
 
@@ -31,6 +33,12 @@ public class  Auto {
     private boolean isBlue;
     private boolean isBucket;
 
+    public ClawSubsystem claw;
+    public ClawSubsystem.ClawGrabState clawGrabState;
+
+    public ArmSubsystem arm;
+    public ArmSubsystem.ArmState armState;
+
 
     public Path preload, element1, score1, element2, score2, element3, score3, park;
     private Pose startPose, preloadPose, element1Pose, element1ControlPose, element2Pose, element2ControlPose, element3Pose, element3ControlPose, elementScorePose, parkControlPose, parkPose;
@@ -46,6 +54,9 @@ public class  Auto {
         startLocation = isBlue ? (isBucket ? RobotStart.BLUE_BUCKET : RobotStart.BLUE_OBSERVATION) : (isBucket ? RobotStart.RED_BUCKET : RobotStart.RED_OBSERVATION);
 
         vision = new VisionSubsystem(hardwareMap, telemetry);
+        arm = new ArmSubsystem(hardwareMap, armState);
+        claw = new ClawSubsystem(hardwareMap, clawGrabState);
+
 
         createPoses();
         buildPaths();

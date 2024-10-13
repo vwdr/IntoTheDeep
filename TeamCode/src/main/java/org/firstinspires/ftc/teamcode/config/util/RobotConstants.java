@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.config;
+package org.firstinspires.ftc.teamcode.config.util;
 
 
 /** Everything that we want to store globally, for example positions of servos, motors, etc. goes in here. **/
@@ -6,14 +6,17 @@ public class RobotConstants {
 
 
     /** Variables are positions for the claw servos. **/
-    public static double closedL = 0.32; //33
-    public static double closedR = 0.38; //37
-    public static double openL = 0.47;//.42
-    public static double openR = 0.23;//.28
-    public static double startClaw = 0.174;
-    public static double groundClaw = 0.835; //.815
-    public static double scoringClaw = 0.25;
+    public static double clawClose = 0.0675;
+    public static double clawOpen = 0.25;
 
+    /** Variables are positions for the arm. **/
+    public static int armRotationCollection = 0;
+    public static double armExtensionHighBasket;
+    public static double armExtensionLowBasket;
+    public static double armExtensionChamber;
+    public static int armRotationChamber;
+    public static int armRotationHighBasket;
+    public static int armRotationLowBasket;
 
     /**Vision Constants**/
     public static final int apriltag = 0;

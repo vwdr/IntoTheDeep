@@ -1,72 +1,71 @@
 package org.firstinspires.ftc.teamcode.config.subsystem;
+import static org.firstinspires.ftc.teamcode.config.util.RobotConstants.*;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import org.firstinspires.ftc.teamcode.config.RobotConstants;
 
-/** This is a subsystem, for the claw of our robot
- * Here we make methods to manipulate the servos
- * We also import RobotConstants to get the positions of the servos.
- *
- * @author Baron Henderson - 20077 The Indubitables
- * @version 2.0, 9/8/2024
- */
+import org.firstinspires.ftc.teamcode.config.util.RobotConstants;
+import org.firstinspires.ftc.teamcode.config.util.action.Actions;
+import org.firstinspires.ftc.teamcode.config.util.action.RunAction;
 
 public class ClawSubsystem {
 
-    private Servo pivot, clawL, clawR;
-
-    /** This is the constructor for the subsystem, it maps the servos to the hardwareMap.
-     * The device names should align with the configuration names on the driver hub.
-     * To use this subsystem, we have to import this file, declare the subsystem (private ClawSubsystem claw;),
-     * and then call the below constructor in the init() method. */
-
-    public ClawSubsystem(HardwareMap hardwareMap) {
-        pivot = hardwareMap.get(Servo.class, "pivot");
-        clawL = hardwareMap.get(Servo.class, "clawL");
-        clawR = hardwareMap.get(Servo.class, "clawR");
+    public enum ClawGrabState {
+        CLOSED, OPEN
     }
 
-    //------------------------------Close Claws------------------------------//
-    public void closeLClaw() {
-        clawL.setPosition(RobotConstants.closedL);
+
+    public Servo grab;
+    public ClawGrabState grabState;
+    public RunAction open, close;
+
+    public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState) {
+        grab = hardwareMap.get(Servo.class, "clawGrab");
+        this.grabState = clawGrabState;
+
+        open = new RunAction(this::open);
+        close = new RunAction(this::close);
+
     }
 
-    public void closeRClaw() {
-        clawR.setPosition(RobotConstants.closedR);
+
+
+    public void setGrabState(ClawGrabState clawGrabState) {
+        if (clawGrabState == ClawGrabState.CLOSED) {
+            grab.setPosition(clawClose);
+            this.grabState = ClawGrabState.CLOSED;
+        } else if (clawGrabState == ClawGrabState.OPEN) {
+            grab.setPosition(clawOpen);
+            this.grabState = ClawGrabState.OPEN;
+        }
     }
 
-    public void closeClaws() {
-        clawL.setPosition(RobotConstants.closedL);
-        clawR.setPosition(RobotConstants.closedR);
+    public void switchGrabState() {
+        if (grabState == ClawGrabState.CLOSED) {
+            setGrabState(ClawGrabState.OPEN);
+        } else if (grabState == ClawGrabState.OPEN) {
+            setGrabState(ClawGrabState.CLOSED);
+        }
     }
 
-    //------------------------------Open Claws------------------------------//
-    public void openLClaw() {
-        clawL.setPosition(RobotConstants.openL);
+    public void open() {
+        setGrabState(ClawGrabState.OPEN);
     }
 
-    public void openRClaw() {
-        clawR.setPosition(RobotConstants.openR);
+    public void close() {
+        setGrabState(ClawGrabState.CLOSED);
     }
 
-    public void openClaws() {
-        clawL.setPosition(RobotConstants.openL);
-        clawR.setPosition(RobotConstants.openR);
+
+    public void init() {
+        close();
     }
 
-    //------------------------------Claw Rotate------------------------------//
+    public void start() {
+        close();
 
-    public void startClaw() {
-        pivot.setPosition(RobotConstants.startClaw);
     }
 
-    public void groundClaw() {
-        pivot.setPosition(RobotConstants.groundClaw);
-    }
 
-    public void scoringClaw() {
-        pivot.setPosition(RobotConstants.scoringClaw);
-    }
 
 }

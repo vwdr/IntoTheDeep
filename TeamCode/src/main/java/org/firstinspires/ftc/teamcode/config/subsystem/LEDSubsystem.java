@@ -2,12 +2,12 @@ package org.firstinspires.ftc.teamcode.config.subsystem;
 import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-public class LED {
+public class LEDSubsystem {
 
     public RevBlinkinLedDriver blinkinLedDriver;
     public String lightmode;
 
-    public LED (HardwareMap hardwareMap) {
+    public LEDSubsystem(HardwareMap hardwareMap) {
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
     }
 

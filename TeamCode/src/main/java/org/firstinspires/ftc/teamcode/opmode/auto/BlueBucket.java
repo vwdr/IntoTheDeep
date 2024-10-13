@@ -8,7 +8,7 @@ import org.firstinspires.ftc.teamcode.config.runmodes.Auto;
 import org.firstinspires.ftc.teamcode.config.util.action.Actions;
 import org.firstinspires.ftc.teamcode.config.util.action.SequentialAction;
 import org.firstinspires.ftc.teamcode.config.subsystem.VisionSubsystem;
-import org.firstinspires.ftc.teamcode.config.subsystem.LED;
+import org.firstinspires.ftc.teamcode.config.subsystem.LEDSubsystem;
 
 @Autonomous(name="BlueBucket", group="B")
 public class BlueBucket extends OpMode {
@@ -17,7 +17,7 @@ public class BlueBucket extends OpMode {
     public int pathState;
     public Auto auto;
     public VisionSubsystem visionSubsystem;
-    public LED led;
+    public LEDSubsystem ledSubsystem;
 
     @Override
     public void init() {
@@ -28,7 +28,7 @@ public class BlueBucket extends OpMode {
     public void start() {
         auto.start();
         visionSubsystem.start();
-        led.lighting();
+        ledSubsystem.lighting();
         setPathState(0);
     }
 
@@ -46,31 +46,27 @@ public class BlueBucket extends OpMode {
     public void pathUpdate() {
         switch (pathState) {
             case 0:
-//                Actions.runBlocking(auto.claw.closeClaw);
-//                Actions.runBlocking(auto.lift.toHighChamber);
-
+                Actions.runBlocking(auto.claw.open);
+                Actions.runBlocking(auto.arm.toDefault);
                 auto.follower.followPath(auto.preload);
-
-//                visionSubsystem.localizationMT2(auto.follower.getPose().getHeading());
-
                 setPathState(1);
                 break;
             case 1:
                 if(!auto.follower.isBusy()) {
-
-
                     auto.follower.followPath(auto.element1);
-
-
+                    Actions.runBlocking(auto.claw.close);
                     setPathState(2);
                 }
                 break;
             case 2:
                 if(!auto.follower.isBusy()) {
                     auto.follower.followPath(auto.score1);
-//                    Actions.runBlocking(auto.intake.spinStop);
-//                    Actions.runBlocking(auto.intake.pivotTransfer);
-
+                    Actions.runBlocking(
+                            new SequentialAction(
+                                    auto.arm.toBlueHighBasket,
+                                    auto.claw.open
+                            )
+                    );
 
                     setPathState(3);
                 }

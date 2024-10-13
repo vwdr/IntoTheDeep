@@ -36,5 +36,12 @@ public class FieldConstants {
     public static final Pose blueBucketParkPose = new Pose(65, 97.75, Math.toRadians(90));
     public static final Pose blueBucketParkControlPose = new Pose(60.25, 123.5);
 
+    //POIs
+    public static final Pose blueBucketPose = new Pose(0,144);
+    public static double highBucketHeight = 43; //inches
+    public static double lowBucketHeight = 25.75; //inches
+    public static double topChamberHeight = 26;
+    public static final Pose redBucketPose = new Pose(144,0);
+
 
 }

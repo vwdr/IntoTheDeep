@@ -2,18 +2,14 @@ package org.firstinspires.ftc.teamcode.config.subsystem;
 
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
-import org.firstinspires.ftc.teamcode.config.RobotConstants;
+import org.firstinspires.ftc.teamcode.config.util.RobotConstants;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.Pose;
 import org.firstinspires.ftc.teamcode.config.pedroPathing.localization.PoseUpdater;
 import com.qualcomm.hardware.limelightvision.LLResult;
-import com.qualcomm.hardware.limelightvision.LLResultTypes;
-import com.qualcomm.hardware.limelightvision.LLStatus;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.robot.Robot;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-import org.firstinspires.ftc.teamcode.config.RobotConstants;
 
 public class VisionSubsystem {
 
@@ -56,12 +52,11 @@ public class VisionSubsystem {
                 break;
             case "yellow":
                 limelight.pipelineSwitch(RobotConstants.yellow);
-                telemetry.addData("Pipeline", "Switched to Red Pipeline");
+                telemetry.addData("Pipeline", "Switched to Yellow Pipeline");
                 distanceCalc();
                 break;
             default:
                 limelight.pipelineSwitch(RobotConstants.obstacleDetection);
-                obstacleDetection();
         }
         telemetry.update();
     }
@@ -87,13 +82,7 @@ public class VisionSubsystem {
         }
 
         //if nothing is detected return 0
-        return 0;
-
-    }
-
-    public void obstacleDetection () {
-
-
+        return -1;
 
     }
 
