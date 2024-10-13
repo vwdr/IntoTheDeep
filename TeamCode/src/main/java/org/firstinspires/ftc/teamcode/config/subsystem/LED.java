@@ -7,7 +7,7 @@ public class LED {
     public RevBlinkinLedDriver blinkinLedDriver;
     public String lightmode;
 
-    public void init (HardwareMap hardwareMap) {
+    public LED (HardwareMap hardwareMap) {
         blinkinLedDriver = hardwareMap.get(RevBlinkinLedDriver.class, "blinkin");
     }
 
