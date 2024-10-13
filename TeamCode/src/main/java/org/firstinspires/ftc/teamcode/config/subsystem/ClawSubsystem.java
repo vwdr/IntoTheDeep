@@ -14,20 +14,28 @@ public class ClawSubsystem {
         CLOSED, OPEN
     }
 
+    public enum ClawPivotState {
+        PARALLEL, PERPENDICULAR
+    }
 
-    public Servo grab;
+
+    public Servo grab,pivot;
     public ClawGrabState grabState;
-    public RunAction open, close;
+    public ClawPivotState pivotState;
+    public RunAction open, close, parallel, perpendicular;
 
-    public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState) {
+    public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState, ClawPivotState clawPivotState) {
         grab = hardwareMap.get(Servo.class, "clawGrab");
+        pivot = hardwareMap.get(Servo.class, "clawPivot");
         this.grabState = clawGrabState;
+        this.pivotState = clawPivotState;
 
         open = new RunAction(this::open);
         close = new RunAction(this::close);
+        parallel = new RunAction(this::parallel);
+        perpendicular = new RunAction(this::perpendicular);
 
     }
-
 
 
     public void setGrabState(ClawGrabState clawGrabState) {
@@ -48,7 +56,27 @@ public class ClawSubsystem {
         }
     }
 
+    public void setPivotState(ClawPivotState state) {
+        if (state == ClawPivotState.PARALLEL) {
+            pivot.setPosition(clawPivotParallel);
+            this.pivotState = ClawPivotState.PARALLEL;
+        } else if (state == ClawPivotState.PERPENDICULAR) {
+            pivot.setPosition(clawPivotPerpendicular);
+            this.pivotState = ClawPivotState.PERPENDICULAR;
+        }
+    }
+
+    public void switchPivotState() {
+        if (pivotState == ClawPivotState.PARALLEL) {
+            setPivotState(ClawPivotState.PERPENDICULAR);
+        } else if (pivotState == ClawPivotState.PERPENDICULAR) {
+            setPivotState(ClawPivotState.PARALLEL);
+        }
+    }
+
+
     public void open() {
+
         setGrabState(ClawGrabState.OPEN);
     }
 
@@ -56,13 +84,25 @@ public class ClawSubsystem {
         setGrabState(ClawGrabState.CLOSED);
     }
 
+    public void parallel () {
+        setPivotState(ClawPivotState.PARALLEL);
+    }
+
+    public void perpendicular () {
+        setPivotState(ClawPivotState.PERPENDICULAR);
+    }
+
 
     public void init() {
+
         close();
+        perpendicular();
     }
 
     public void start() {
+
         close();
+        perpendicular();
 
     }
 

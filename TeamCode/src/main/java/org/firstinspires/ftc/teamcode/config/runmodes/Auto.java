@@ -35,6 +35,7 @@ public class  Auto {
 
     public ClawSubsystem claw;
     public ClawSubsystem.ClawGrabState clawGrabState;
+    public ClawSubsystem.ClawPivotState clawPivotState;
 
     public ArmSubsystem arm;
     public ArmSubsystem.ArmState armState;
@@ -55,7 +56,7 @@ public class  Auto {
 
         vision = new VisionSubsystem(hardwareMap, telemetry);
         arm = new ArmSubsystem(hardwareMap, armState);
-        claw = new ClawSubsystem(hardwareMap, clawGrabState);
+        claw = new ClawSubsystem(hardwareMap, clawGrabState, clawPivotState);
 
 
         createPoses();
