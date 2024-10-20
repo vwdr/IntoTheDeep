@@ -19,14 +19,13 @@ public class ClawSubsystem {
     }
 
 
-    public Servo roll1,roll2, pivot1, pivot2;
+    public Servo intakeServo, pivot1, pivot2;
     public ClawGrabState grabState;
     public ClawPivotState pivotState;
     public RunAction release, intake, deafult, aligned;
 
     public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState, ClawPivotState clawPivotState) {
-        roll1 = hardwareMap.get(Servo.class, "activeIntake1");
-        roll2 = hardwareMap.get(Servo.class, "activeIntake2");
+        intakeServo = hardwareMap.get(Servo.class, "intakeServo");
         pivot1 = hardwareMap.get(Servo.class, "pivot1");
         pivot2 = hardwareMap.get(Servo.class, "pivot2");
         this.grabState = clawGrabState;
@@ -42,12 +41,10 @@ public class ClawSubsystem {
 
     public void setGrabState(ClawGrabState clawGrabState) {
         if (clawGrabState == ClawGrabState.INTAKE) {
-            roll1.setPosition(clawIntake);
-            roll2.setPosition(clawIntake);
+            intakeServo.setPosition(clawIntake);
             this.grabState = ClawGrabState.INTAKE;
         } else if (clawGrabState == ClawGrabState.RELEASE) {
-            roll1.setPosition(clawRelease);
-            roll2.setPosition(clawRelease);
+            intakeServo.setPosition(clawRelease);
             this.grabState = ClawGrabState.RELEASE;
         }
     }
