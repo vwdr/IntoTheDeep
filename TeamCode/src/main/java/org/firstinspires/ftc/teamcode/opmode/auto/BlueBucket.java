@@ -46,7 +46,7 @@ public class BlueBucket extends OpMode {
     public void pathUpdate() {
         switch (pathState) {
             case 0:
-                Actions.runBlocking(auto.claw.open);
+                Actions.runBlocking(auto.claw.release);
                 Actions.runBlocking(auto.arm.toDefault);
                 auto.follower.followPath(auto.preload);
                 setPathState(1);
@@ -54,7 +54,7 @@ public class BlueBucket extends OpMode {
             case 1:
                 if(!auto.follower.isBusy()) {
                     auto.follower.followPath(auto.element1);
-                    Actions.runBlocking(auto.claw.close);
+                    Actions.runBlocking(auto.claw.intake);
                     setPathState(2);
                 }
                 break;
@@ -64,7 +64,7 @@ public class BlueBucket extends OpMode {
                     Actions.runBlocking(
                             new SequentialAction(
                                     auto.arm.toBlueHighBasket,
-                                    auto.claw.open
+                                    auto.claw.release
                             )
                     );
 

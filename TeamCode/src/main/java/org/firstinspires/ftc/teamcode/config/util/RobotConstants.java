@@ -6,10 +6,10 @@ public class RobotConstants {
 
 
     /** Variables are positions for the claw servos. **/
-    public static double clawClose = 0.0675;
-    public static double clawOpen = 0.25;
-    public static double clawPivotPerpendicular = 0;
-    public static double clawPivotParallel = 1;
+    public static double clawIntake = 1;
+    public static double clawRelease = -1;
+    public static double clawPivotAligned = 0.5;
+    public static double clawPivotDeafult = 0;
 
     /** Variables are positions for the arm. **/
     public static int armRotationCollection = 0;

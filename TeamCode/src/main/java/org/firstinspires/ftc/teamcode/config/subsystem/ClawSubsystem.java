@@ -11,98 +11,106 @@ import org.firstinspires.ftc.teamcode.config.util.action.RunAction;
 public class ClawSubsystem {
 
     public enum ClawGrabState {
-        CLOSED, OPEN
+        INTAKE, RELEASE
     }
 
     public enum ClawPivotState {
-        PARALLEL, PERPENDICULAR
+        DEAFULT, ALIGNED //deafult: parallel to ground/starting position, aligned: aligned with the arm
     }
 
 
-    public Servo grab,pivot;
+    public Servo roll1,roll2, pivot1, pivot2;
     public ClawGrabState grabState;
     public ClawPivotState pivotState;
-    public RunAction open, close, parallel, perpendicular;
+    public RunAction release, intake, deafult, aligned;
 
     public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState, ClawPivotState clawPivotState) {
-        grab = hardwareMap.get(Servo.class, "clawGrab");
-        pivot = hardwareMap.get(Servo.class, "clawPivot");
+        roll1 = hardwareMap.get(Servo.class, "activeIntake1");
+        roll2 = hardwareMap.get(Servo.class, "activeIntake2");
+        pivot1 = hardwareMap.get(Servo.class, "pivot1");
+        pivot2 = hardwareMap.get(Servo.class, "pivot2");
         this.grabState = clawGrabState;
         this.pivotState = clawPivotState;
 
-        open = new RunAction(this::open);
-        close = new RunAction(this::close);
-        parallel = new RunAction(this::parallel);
-        perpendicular = new RunAction(this::perpendicular);
+        release = new RunAction(this::release);
+        intake = new RunAction(this::intake);
+        deafult = new RunAction(this::deafult);
+        aligned = new RunAction(this::aligned);
 
     }
 
 
     public void setGrabState(ClawGrabState clawGrabState) {
-        if (clawGrabState == ClawGrabState.CLOSED) {
-            grab.setPosition(clawClose);
-            this.grabState = ClawGrabState.CLOSED;
-        } else if (clawGrabState == ClawGrabState.OPEN) {
-            grab.setPosition(clawOpen);
-            this.grabState = ClawGrabState.OPEN;
+        if (clawGrabState == ClawGrabState.INTAKE) {
+            roll1.setPosition(clawIntake);
+            roll2.setPosition(clawIntake);
+            this.grabState = ClawGrabState.INTAKE;
+        } else if (clawGrabState == ClawGrabState.RELEASE) {
+            roll1.setPosition(clawRelease);
+            roll2.setPosition(clawRelease);
+            this.grabState = ClawGrabState.RELEASE;
         }
     }
 
     public void switchGrabState() {
-        if (grabState == ClawGrabState.CLOSED) {
-            setGrabState(ClawGrabState.OPEN);
-        } else if (grabState == ClawGrabState.OPEN) {
-            setGrabState(ClawGrabState.CLOSED);
+        if (grabState == ClawGrabState.INTAKE) {
+            setGrabState(ClawGrabState.RELEASE);
+        } else if (grabState == ClawGrabState.RELEASE) {
+            setGrabState(ClawGrabState.INTAKE);
         }
     }
 
     public void setPivotState(ClawPivotState state) {
-        if (state == ClawPivotState.PARALLEL) {
-            pivot.setPosition(clawPivotParallel);
-            this.pivotState = ClawPivotState.PARALLEL;
-        } else if (state == ClawPivotState.PERPENDICULAR) {
-            pivot.setPosition(clawPivotPerpendicular);
-            this.pivotState = ClawPivotState.PERPENDICULAR;
+        if (state == ClawPivotState.DEAFULT) {
+            pivot1.setPosition(clawPivotDeafult);
+            pivot2.setPosition(clawPivotDeafult);
+            this.pivotState = ClawPivotState.DEAFULT;
+        } else if (state == ClawPivotState.ALIGNED) {
+            pivot1.setPosition(clawPivotAligned);
+            pivot2.setPosition(clawPivotAligned);
+            this.pivotState = ClawPivotState.ALIGNED;
         }
     }
 
     public void switchPivotState() {
-        if (pivotState == ClawPivotState.PARALLEL) {
-            setPivotState(ClawPivotState.PERPENDICULAR);
-        } else if (pivotState == ClawPivotState.PERPENDICULAR) {
-            setPivotState(ClawPivotState.PARALLEL);
+        if (pivotState == ClawPivotState.DEAFULT) {
+            setPivotState(ClawPivotState.ALIGNED);
+        } else if (pivotState == ClawPivotState.ALIGNED) {
+            setPivotState(ClawPivotState.DEAFULT);
         }
     }
 
 
-    public void open() {
+    public void release() {
 
-        setGrabState(ClawGrabState.OPEN);
+        setGrabState(ClawGrabState.RELEASE);
     }
 
-    public void close() {
-        setGrabState(ClawGrabState.CLOSED);
+    public void intake() {
+
+        setGrabState(ClawGrabState.INTAKE);
     }
 
-    public void parallel () {
-        setPivotState(ClawPivotState.PARALLEL);
+    public void deafult () {
+
+        setPivotState(ClawPivotState.DEAFULT);
     }
 
-    public void perpendicular () {
-        setPivotState(ClawPivotState.PERPENDICULAR);
+    public void aligned () {
+        setPivotState(ClawPivotState.ALIGNED);
     }
 
 
     public void init() {
 
-        close();
-        perpendicular();
+        intake();
+        deafult();
     }
 
     public void start() {
 
-        close();
-        perpendicular();
+        intake();
+        deafult();
 
     }
 
