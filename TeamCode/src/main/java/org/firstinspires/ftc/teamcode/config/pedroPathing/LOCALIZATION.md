@@ -108,7 +108,7 @@ that applies to you and follow the directions there.
 # Three Wheel Localizer
 * First, you'll need three odometry wheels connected to motor encoder ports on a hub.
 * Then, go to `ThreeWheelLocalizer.java`. First, in the constructor, enter in the positions of your
-  tracking wheels relative to the center of the wheels of the robot. The positions are in inches, so
+  tracking wheels relative to the center of the robot. The positions are in inches, so
   convert measurements accordingly. Use the comment above the class declaration to help you with the
   coordinates.
 * Next, go to where it tells you to replace the current statements with your encoder ports in the constructor.

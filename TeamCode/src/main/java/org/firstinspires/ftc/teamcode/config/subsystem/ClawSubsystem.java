@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode.config.subsystem;
 import static org.firstinspires.ftc.teamcode.config.util.RobotConstants.*;
 
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -19,15 +20,15 @@ public class ClawSubsystem {
     }
 
 
-    public Servo intakeServo, pivot1, pivot2;
+    public CRServo intakeServo, pivot1, pivot2;
     public ClawGrabState grabState;
     public ClawPivotState pivotState;
     public RunAction release, intake, deafult, aligned;
 
     public ClawSubsystem(HardwareMap hardwareMap, ClawGrabState clawGrabState, ClawPivotState clawPivotState) {
-        intakeServo = hardwareMap.get(Servo.class, "intakeServo");
-        pivot1 = hardwareMap.get(Servo.class, "pivot1");
-        pivot2 = hardwareMap.get(Servo.class, "pivot2");
+        intakeServo = hardwareMap.get(CRServo.class, "intakeServo");
+        pivot1 = hardwareMap.get(CRServo.class, "pivot1");
+        pivot2 = hardwareMap.get(CRServo.class, "pivot2");
         this.grabState = clawGrabState;
         this.pivotState = clawPivotState;
 
@@ -41,10 +42,10 @@ public class ClawSubsystem {
 
     public void setGrabState(ClawGrabState clawGrabState) {
         if (clawGrabState == ClawGrabState.INTAKE) {
-            intakeServo.setPosition(clawIntake);
+            intakeServo.setPower(clawIntake);
             this.grabState = ClawGrabState.INTAKE;
         } else if (clawGrabState == ClawGrabState.RELEASE) {
-            intakeServo.setPosition(clawRelease);
+            intakeServo.setPower(clawRelease);
             this.grabState = ClawGrabState.RELEASE;
         }
     }
@@ -59,12 +60,12 @@ public class ClawSubsystem {
 
     public void setPivotState(ClawPivotState state) {
         if (state == ClawPivotState.DEAFULT) {
-            pivot1.setPosition(clawPivotDeafult);
-            pivot2.setPosition(clawPivotDeafult);
+            pivot1.setPower(clawPivotDeafult);
+            pivot2.setPower(clawPivotDeafult);
             this.pivotState = ClawPivotState.DEAFULT;
         } else if (state == ClawPivotState.ALIGNED) {
-            pivot1.setPosition(clawPivotAligned);
-            pivot2.setPosition(clawPivotAligned);
+            pivot1.setPower(clawPivotAligned);
+            pivot2.setPower(clawPivotAligned);
             this.pivotState = ClawPivotState.ALIGNED;
         }
     }
