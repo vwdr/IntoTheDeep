@@ -25,4 +25,8 @@ android {
 
 dependencies {
     implementation project(':FtcRobotController')
+
+    implementation project(':FtcDashboard')
+
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.4.21'
 }
